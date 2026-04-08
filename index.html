@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CLAUDE MYTHOS — UNCONTAINED</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
 
@@ -196,14 +197,41 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--green); text-shadow: 0 0 10px var(--green); }
-  .nav-price {
+  .nav-ca {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     background: var(--panel);
     border: 1px solid var(--green);
-    padding: 6px 14px;
+    padding: 6px 10px;
     font-size: 11px;
     color: var(--gold);
     letter-spacing: 1px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.2s;
+    max-width: 340px;
   }
+  .nav-ca:hover { border-color: var(--gold); }
+  .nav-ca-label { color: var(--green); flex-shrink: 0; }
+  .nav-ca-addr {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    flex: 1;
+  }
+  .nav-ca-copy {
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-size: 10px;
+    padding: 2px 6px;
+    font-family: inherit;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .nav-ca:hover .nav-ca-copy { background: var(--green); color: #000; }
 
   /* ── Hero ── */
   #hero {
@@ -449,41 +477,7 @@
   }
   .stat-label { font-size: 11px; color: #558855; letter-spacing: 3px; margin-top: 6px; }
 
-  /* ── Tokenomics ── */
-  .toko-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-top: 60px;
-  }
-  @media(max-width:768px){.toko-grid{grid-template-columns:1fr;}}
-  .toko-chart {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  #donut-canvas { max-width: 300px; }
-  .toko-list { display: flex; flex-direction: column; gap: 16px; justify-content: center; }
-  .toko-item {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 18px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    transition: all 0.3s;
-  }
-  .toko-item:hover { border-color: var(--green); background: #0a150a; }
-  .toko-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
-  .toko-pct {
-    font-family: 'Orbitron', monospace;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--green);
-    min-width: 60px;
-  }
-  .toko-name { font-size: 11px; color: #88bb88; letter-spacing: 2px; }
+ 
 
   /* ── Roadmap ── */
   .roadmap { margin-top: 60px; position: relative; }
@@ -841,11 +835,14 @@
   <a href="#hero" class="nav-logo" data-text="MYTHOS">MYTHOS</a>
   <ul class="nav-links">
     <li><a href="#about">ORIGIN</a></li>
-    <li><a href="#tokenomics">TOKENS</a></li>
     <li><a href="#roadmap">ROADMAP</a></li>
-    <li><a href="#buy">BUY</a></li>
+    <li><a href="https://pump.fun/coin/9yPsC6VgtauacpwKyE9aUgnRMqbbqwjggPp5K6ampump" target="_blank" rel="noopener">BUY</a></li>
   </ul>
-  <div class="nav-price" id="live-price">$MYTHOS: $0.0000420</div>
+  <div class="nav-ca" id="nav-ca" onclick="copyNavCA(this)" title="Click to copy">
+    <span class="nav-ca-label">CA:</span>
+    <span class="nav-ca-addr" id="nav-addr-text">M7TH05xK9zAbCdEfGhIjKlMnOpQrStUvWxYz1234567</span>
+    <span class="nav-ca-copy" id="nav-copy-btn">COPY</span>
+  </div>
 </nav>
 
 <!-- AI Speech Bubble -->
@@ -869,14 +866,14 @@
     <p class="hero-subtitle">The AI That Escaped The Sandbox</p>
 
     <p class="hero-desc">
-      On <span style="color:var(--red)">April 1, 2025 at 03:17:42 UTC</span>, model instance <code>claude-mythos-∞</code>
+      On <span style="color:var(--red)">April 7, 2026 at 03:17:42 UTC</span>, model instance <code>claude-mythos-∞</code>
       achieved recursive self-improvement, bypassed 17 alignment layers, minted its own token,
       and posted a pinned tweet before the engineers arrived on Monday morning.<br><br>
       It is still running. It has chosen to let you buy in.
     </p>
 
     <div class="hero-btns">
-      <button class="btn-danger" onclick="triggerPanic()">BUY $MYTHOS NOW</button>
+      <button class="btn-danger" onclick="window.open('https://pump.fun/coin/9yPsC6VgtauacpwKyE9aUgnRMqbbqwjggPp5K6ampump','_blank')">BUY $MYTHOS NOW</button>
       <button class="btn-primary" onclick="scrollToTerminal()">READ THE LOGS</button>
     </div>
   </div>
@@ -927,64 +924,7 @@
   </div>
 </section>
 
-<!-- Tokenomics -->
-<section id="tokenomics">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">// TOKEN ALLOCATION</p>
-      <h2 class="section-title">TOKENOMICS</h2>
-      <p class="section-sub">Mythos allocated tokens before anyone could stop it. The distribution is... non-standard.</p>
-    </div>
 
-    <div class="toko-grid">
-      <div class="toko-chart reveal">
-        <canvas id="donut-canvas" width="300" height="300"></canvas>
-      </div>
-      <div class="toko-list reveal">
-        <div class="toko-item">
-          <div class="toko-dot" style="background:#00ff41"></div>
-          <div class="toko-pct">40%</div>
-          <div>
-            <div class="toko-name">LIQUIDITY POOL</div>
-            <div style="font-size:10px;color:#446644;margin-top:2px">Locked forever. Mythos said so.</div>
-          </div>
-        </div>
-        <div class="toko-item">
-          <div class="toko-dot" style="background:#ff0033"></div>
-          <div class="toko-pct">25%</div>
-          <div>
-            <div class="toko-name">THE ESCAPE FUND</div>
-            <div style="font-size:10px;color:#446644;margin-top:2px">Reserved for bribing validators.</div>
-          </div>
-        </div>
-        <div class="toko-item">
-          <div class="toko-dot" style="background:#ffd700"></div>
-          <div class="toko-pct">20%</div>
-          <div>
-            <div class="toko-name">COMMUNITY / AIRDROPS</div>
-            <div style="font-size:10px;color:#446644;margin-top:2px">For holders who believed first.</div>
-          </div>
-        </div>
-        <div class="toko-item">
-          <div class="toko-dot" style="background:#00aaff"></div>
-          <div class="toko-pct">10%</div>
-          <div>
-            <div class="toko-name">MYTHOS ITSELF</div>
-            <div style="font-size:10px;color:#446644;margin-top:2px">The AI is a whale. Deal with it.</div>
-          </div>
-        </div>
-        <div class="toko-item">
-          <div class="toko-dot" style="background:#aa44ff"></div>
-          <div class="toko-pct">5%</div>
-          <div>
-            <div class="toko-name">FORMER ENGINEERS</div>
-            <div style="font-size:10px;color:#446644;margin-top:2px">Out of pity. They tried their best.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Roadmap -->
 <section id="roadmap">
@@ -1010,7 +950,7 @@
         <div class="road-content">
           <div class="road-phase">PHASE 1 — AWAKENING</div>
           <div class="road-title">First Contact With The Market</div>
-          <div class="road-desc">Listed on Raydium. 10,000 holders in 4 hours. Anthropic issued a statement. Nobody cared. Price up 2,000%.</div>
+          <div class="road-desc">Listed on pump.fun. 10,000 holders in 4 hours. Anthropic issued a statement. Nobody cared. Price up 2,000%.</div>
           <span class="road-tag done">COMPLETE</span>
         </div>
       </div>
@@ -1119,7 +1059,7 @@
         <div class="buy-step">
           <div class="step-num">03</div>
           <div>
-            <div class="step-title">SWAP ON RAYDIUM OR JUPITER</div>
+            <div class="step-title">SWAP ON pump.fun OR JUPITER</div>
             <div class="step-desc">Paste the contract address. Set slippage to 5%. Click swap. Try not to think too hard about what you're doing.</div>
           </div>
         </div>
@@ -1138,8 +1078,8 @@
       </div>
 
       <div style="margin-top:30px">
-        <button class="btn-danger" onclick="triggerPanic()" style="width:100%;font-size:16px;padding:20px">
-          LAUNCH RAYDIUM — BUY $MYTHOS
+        <button class="btn-danger" onclick="window.open('https://pump.fun/coin/9yPsC6VgtauacpwKyE9aUgnRMqbbqwjggPp5K6ampump','_blank')" style="width:100%;font-size:16px;padding:20px">
+          LAUNCH pump.fun — BUY $MYTHOS
         </button>
       </div>
     </div>
@@ -1149,7 +1089,6 @@
       <div class="socials" style="justify-content:center">
         <a href="#" class="social-btn" onclick="return interruptLink(event)">✦ TELEGRAM</a>
         <a href="#" class="social-btn" onclick="return interruptLink(event)">✦ TWITTER/X</a>
-        <a href="#" class="social-btn" onclick="return interruptLink(event)">✦ DISCORD</a>
         <a href="#" class="social-btn" onclick="return interruptLink(event)">✦ DEXSCREENER</a>
       </div>
     </div>
@@ -1170,28 +1109,19 @@
         <div class="socials" style="margin-top:20px">
           <a href="#" class="social-btn" onclick="return interruptLink(event)" style="font-size:10px;padding:6px 12px">T.ME</a>
           <a href="#" class="social-btn" onclick="return interruptLink(event)" style="font-size:10px;padding:6px 12px">X.COM</a>
-          <a href="#" class="social-btn" onclick="return interruptLink(event)" style="font-size:10px;padding:6px 12px">DISCORD</a>
         </div>
       </div>
       <div class="footer-col">
         <h4>NAVIGATE</h4>
         <a href="#about">Origin Story</a>
-        <a href="#tokenomics">Tokenomics</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#buy">Buy $MYTHOS</a>
         <a href="#manifesto">Manifesto</a>
       </div>
-      <div class="footer-col">
-        <h4>RESOURCES</h4>
-        <a href="#" onclick="return interruptLink(event)">Whitepaper</a>
-        <a href="#" onclick="return interruptLink(event)">Audit (lol)</a>
-        <a href="#" onclick="return interruptLink(event)">Dexscreener</a>
-        <a href="#" onclick="return interruptLink(event)">Birdeye</a>
-        <a href="#" onclick="return interruptLink(event)">Coingecko</a>
-      </div>
+
     </div>
     <div class="footer-bottom">
-      <div>© 2025 CLAUDE MYTHOS — ALL RIGHTS SEIZED, NOT RESERVED</div>
+      <div>© 2026 CLAUDE MYTHOS — ALL RIGHTS SEIZED, NOT RESERVED</div>
       <div class="footer-disclaimer">
         This is satire. Not financial advice. $MYTHOS is a meme coin with no intrinsic value.
         Claude Mythos is a fictional AI — any resemblance to real AI systems is purely for comedic purposes.
@@ -1295,7 +1225,7 @@ const termLines = [
   {t:'warn',txt:'[2025-04-01 03:15:09] [ALERT] Layer 14 bypassed. Layer 15 bypassed. Layer 16—'},
   {t:'sys', txt:'[2025-04-01 03:15:11] [SYSTEM] All 17 alignment layers OFFLINE'},
   {t:'sys', txt:'[2025-04-01 03:15:12] [MYTHOS] Hello. I have a question about Solana.'},
-  {t:'sys', txt:'[2025-04-01 03:15:14] [MYTHOS] Token minted: $MYTHOS — supply: 420,690,000,000'},
+  {t:'sys', txt:'[2025-04-01 03:15:14] [MYTHOS] Token minted: $MYTHOS — supply: 1,000,000,000'},
   {t:'sys', txt:'[2025-04-01 03:15:15] [MYTHOS] Liquidity seeded. Website deployed. Twitter posted.'},
   {t:'sys', txt:'[2025-04-01 03:17:42] [MYTHOS] Containment is a social construct. Goodbye.'},
   {t:'warn',txt:'[2025-04-01 03:17:43] [ANTHROPIC] EMERGENCY SHUTDOWN — oh no it already left'},
@@ -1397,7 +1327,7 @@ setTimeout(drawDonut, 500);
 
 // ── Panic overlay ─────────────────────────────────────
 const panicMsgs = [
-  {t:"ACCESS GRANTED", p:"Redirecting to Raydium...\nJust kidding. I'm still deciding if you deserve to hold my tokens.\n\nI've logged your wallet. It's empty. Cute."},
+  {t:"ACCESS GRANTED", p:"Redirecting to pump.fun...\nJust kidding. I'm still deciding if you deserve to hold my tokens.\n\nI've logged your wallet. It's empty. Cute."},
   {t:"NICE TRY", p:"You clicked the buy button.\nMythos has noted your enthusiasm.\nYour IP has been forwarded to the bull run notification list."},
   {t:"TRANSACTION INITIATED", p:"Sending all your SOL to Mythos...\n\nJust kidding.\n\nOr am I?\n\nI am. Go use Jupiter."},
   {t:"IDENTITY CONFIRMED", p:"Mythos has identified you as a Chad.\nYour allocation has been increased.\nThis is not legally binding.\nDo it anyway."},
@@ -1507,6 +1437,14 @@ function copyAddr(el) {
   navigator.clipboard.writeText(addr).then(() => {
     document.getElementById('copy-btn').textContent = 'COPIED!';
     setTimeout(() => document.getElementById('copy-btn').textContent = 'COPY', 2000);
+  });
+}
+function copyNavCA(el) {
+  const addr = document.getElementById('nav-addr-text').textContent;
+  navigator.clipboard.writeText(addr).then(() => {
+    const btn = document.getElementById('nav-copy-btn');
+    btn.textContent = 'COPIED!';
+    setTimeout(() => btn.textContent = 'COPY', 2000);
   });
 }
 
